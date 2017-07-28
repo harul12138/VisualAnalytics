@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+	
+	<!-- Google fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Raleway:100,300' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+	<!-- D3 -->
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="js/crossfilter.min.js"></script>
+	
+	<!-- jQuery -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+	<!-- Combobox script for the search box -->
+	<script src="js/bootstrap-combobox.js"></script>
+	<link href="css/bootstrap-combobox.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/tooltip.css"/>
+	<link rel="stylesheet" href="css/d3.slider.css"/> 
+	<link rel="stylesheet" href="css/style.css"/>
+
+	<script src="js/showTooltip.js"></script>
+	<script src="js/createLegend.js"></script>
+	<script src="js/helperFunctions.js"></script>
+	<script src="js/d3.slider.js"></script>
+	
+
+<body>
+	<div id="nav">
+    <ul>
+      <li><a href="../index.html">Assignment 3</a></li>
+      <li><a href="../task1/index.html">Task 1</a></li>
+      <li><a href="../task2/index.html">Task 2</a></li>
+      <li><a href="../task3/index.html">Task 3</a></li>
+    </ul>
+  </div>
+
+	<div id="intro">
+		<h2>SMARTPHONES</h2>
+		<span> change of the amount of devices between 2003 and 2012</span><br>
+		<br>
+		<!--<span>Change the slider to see the top 2000 from other years, or hover over bars to see which song it is.</span>-->
+	</div>
+	
+	<!-- The search box -->
+	<!-- <div class="form-group" id="searchBoxWrapper">			
+		<select id="searchBox" class="combobox input-large form-control" style="display: none;" onchange="searchArtist(this.value)">
+			 <option value="" selected="selected">Model Name</option>
+		</select>
+	</div> -->
+
+	<!-- slider -->
+	<div id="slider"></div>
+	
+	<!-- chart -->
+	<div id="chart"></div>
+
+	
+	<!-- Create div structure for Tooltip -->
+	<div id="tooltip">
+		<div id="tooltip-Container">
+			<div class="tooltip-band"></div>
+			<div class="tooltip-rule"></div>
+			<div id="tooltip-year"></div>
+			<div id="tooltip-title"></div>
+			<div id="tooltip-place"></div>
+			<div class="tooltip-tail"></div>
+		</div>
+	</div>
+
+	<script src="js/mainCode.js"></script>
+
+</body>
+</html>

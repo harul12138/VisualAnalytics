@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>COMP5048 ASSIGNMENT 3</title>
+    <link rel="stylesheet" type="text/css" href="parallel.css" />
+
+<style type="text/css">  
+
+#nav {
+border-top-color: rgb(51, 51, 51);
+border-top-style: none;
+border-top-width: 0px;
+box-shadow: none;
+box-sizing: border-box;
+color: rgb(51, 51, 51);
+display: block;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 14px;
+height: 50px;
+line-height: 20px;
+margin-left: 0px;
+margin-right: 0px;
+overflow: visible;
+overflow-x: visible;
+overflow-y: visible;
+padding-bottom: 0px;
+padding-left: 15px;
+padding-right: 15px;
+visibility: visible;
+background: #fff;
+}
+
+#nav ul {
+list-style: none;
+float: left;
+box-sizing: border-box;
+color: rgb(51, 51, 51);
+floatleftfont-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 14px;
+line-height: 20px;
+list-style-image: none;
+list-style-position: outside;
+list-style-type: none;
+margin-bottom: 0px;
+margin-left: 0px;
+margin-right: 0px;
+margin-top: 0px;
+padding-left: 0px;
+visibility: visible;
+}
+
+#nav li {
+float: left;
+}
+
+#nav a {
+background-color: transparent;
+box-sizing: border-box;
+color: rgb(51, 122, 183);
+display: block;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 14px;
+line-height: 20px;
+list-style-image: none;
+list-style-position: outside;
+list-style-type: none;
+padding-bottom: 15px;
+padding-left: 15px;
+padding-right: 15px;
+padding-top: 15px;
+position: relative;
+text-decoration: none;
+text-decoration-color: rgb(51, 122, 183);
+text-decoration-line: none;
+text-decoration-style: solid;
+visibility: visible;
+
+}
+
+#nav a:hover {
+text-decoration: none;
+background-color: #eee;
+}
+
+</style> 
+
+  </head>
+  <body>
+
+  <div id="nav">
+    <ul>
+      <li><a href="../index.html">Assignment 3</a></li>
+      <li><a href="../task1/index.html">Task 1</a></li>
+      <li><a href="../task2/index.html">Task 2</a></li>
+      <li><a href="../task3/index.html">Task 3</a></li>
+    </ul>
+  </div>
+
+
+  <div id="header">
+    <div id="data-size" class="data-size">
+      <span>Select Theme :</span>
+      <button id="theme" onmouseover="this.style.cursor='pointer'" enabled="enabled">Dark Theme</button><br>
+      <span>data :</span>
+      <strong id="rendered-count"></strong>/<strong id="selected-count"></strong><!--<strong id="data-count"></strong>-->
+      <div class="fillbar"><div id="selected-bar"><div id="rendered-bar">&nbsp;</div></div></div>
+      <strong style="display:none" id="opacity"></strong>
+    </div>
+    <div style="min-width:540px; width:740px;">
+      <h1 class="header-top">COMP5048 ASSIGNMENT 3</h1><span id="u1">Group 6</span>
+      <br>
+      <span class="header-top"><span id="u2">Group Members : Yakun Li, Xilin Zhang, Minjing Dong, Xiaodong Xu, Jiaxin Cheng, Lu han</span></span>
+    </div>
+
+    <div style="clear:both;"></div>
+  </div>
+  <div id="chartlabel">
+    <p>Attributes via Parallel Coordinates</p>
+  </div>
+  <div id="chart">
+    <canvas id="background"></canvas>
+    <canvas id="foreground"></canvas>
+    <canvas id="highlight"></canvas>
+    <svg></svg>
+  </div>
+  <div id="chartlabel">
+    <p>The Amount of Devices by Release Year</p>
+  </div>
+  <div id="chart2">
+  </div>
+
+  <div id="conc">
+    <div style="clear:both;"><h3>Conclusions:</h3></div>
+    <div class="third">
+        Cluster 0 --- feature phones/early- stage smartphones<br>
+        Cluster 1 --- mid- performance smartphones<br>
+        Cluster 2 --- wide-screen smartphones<br>
+    </div>
+    <div class="third">
+        Cluster 3 --- PDAs and early-stage tablets<br>
+        Cluster 4 --- high- performance tablets<br>
+        Cluster 5 --- high-performance smartphones<br>
+    </div>
+    <div class="third">
+        Cluster 6 --- keypad-based/mid-size smartphones<br>
+    </div>
+  </div>
+
+
+  <div draggable="true" id="wrap">
+    <div class="third">
+      <div class="little-box">
+        <h3>Control Panel</h3>
+        <p>
+          <span id="avgdemo"><strong style="color:#1bff32;">——————</strong> : Average line</span>
+        </p>
+        <br>
+        <h3>Filter :</h3>
+        <button title="Remove selected data" id="remove-filters" onmouseover="this.style.cursor='pointer'" enabled="enabled">Reset Filters</button>
+        <p>
+          <strong>Filter</strong> : Drag along an axis<br>
+          <strong>Remove Filter</strong> : Click the axis background<br>
+          <strong>Drag Filter</strong> to help visualize the relation<br>
+          <strong>Drag this panel around</strong>
+        </p>
+        <br>
+<!--
+        <h3>About:</h3>
+        <p>
+          Based on data gathered from excel
+          <br><br>
+          Visualized using the Parallel Coordinates technique and d3.js. Reviews and Downloads axis are scaled logarithmically 
+          </p>
+            <br>
+          *Download Health Data from <a href="http://www.oecd.org/els/healthpoliciesanddata/oecdhealthdata2012-frequentlyrequesteddata.htm">OECD</a>
+-->
+      </div>
+    </div>
+    <div  class="third">
+      <small>
+        <!--Last rendered <strong id="render-speed"></strong> lines-->
+      </small>
+      <h3>Cluster ID :</h3><button id="sel-all" onmouseover="this.style.cursor='pointer'" enabled="enabled">Unselect All Categories</button>
+      <p id="legend">
+      </p>
+    </div>
+    <div class="third">
+      <div id="sorted-by"></div>
+      <h3>Model Search :</h3><input type="text" id="search" placeholder="Search Data...">
+      <p><strong>Note</strong> : Randomly show upto 24 data</p>
+      <div id="catlist">
+      <p id="category-list">
+      </p>
+      </div>
+    </div>
+  </div>
+  </body>
+<!--
+  <div id="credits">
+    Credits, etc:
+      Adapted from an <a href="http://bl.ocks.org/d/3267951/">example</a> by <a href="https://github.com/syntagmatic">Kai Chang</a>.  Download estimates from <a href="http://www.oecd.org/els/healthpoliciesanddata/">OECD.org</a>.
+      Released under the <a href="http://opensource.org/licenses/bsd-3-clause">BSD License</a>.
+  </div>
+-->
+<!--
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js "></script>-->
+
+  <script src="d3v3.5.17/d3.js"></script>
+  <script src="jquery-3.1.1.js"></script>
+  <script src="underscorev1.8.3.js"></script>
+  <script src="jquery.color.js"></script>
+  <script src="comp5048.js"></script>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>Moble Device Data</title>
+    <link rel="stylesheet" type="text/css" href="parallel.css" />
+
+<style type="text/css">  
+
+#nav {
+border-top-color: rgb(51, 51, 51);
+border-top-style: none;
+border-top-width: 0px;
+box-shadow: none;
+box-sizing: border-box;
+color: rgb(51, 51, 51);
+display: block;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 14px;
+height: 50px;
+line-height: 20px;
+margin-left: 0px;
+margin-right: 0px;
+overflow: visible;
+overflow-x: visible;
+overflow-y: visible;
+padding-bottom: 0px;
+padding-left: 15px;
+padding-right: 15px;
+visibility: visible;
+background: #fff;
+}
+
+#nav ul {
+list-style: none;
+float: left;
+box-sizing: border-box;
+color: rgb(51, 51, 51);
+floatleftfont-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 14px;
+line-height: 20px;
+list-style-image: none;
+list-style-position: outside;
+list-style-type: none;
+margin-bottom: 0px;
+margin-left: 0px;
+margin-right: 0px;
+margin-top: 0px;
+padding-left: 0px;
+visibility: visible;
+}
+
+#nav li {
+float: left;
+}
+
+#nav a {
+background-color: transparent;
+box-sizing: border-box;
+color: rgb(51, 122, 183);
+display: block;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 14px;
+line-height: 20px;
+list-style-image: none;
+list-style-position: outside;
+list-style-type: none;
+padding-bottom: 15px;
+padding-left: 15px;
+padding-right: 15px;
+padding-top: 15px;
+position: relative;
+text-decoration: none;
+text-decoration-color: rgb(51, 122, 183);
+text-decoration-line: none;
+text-decoration-style: solid;
+visibility: visible;
+
+}
+
+#nav a:hover {
+text-decoration: none;
+background-color: #eee;
+}
+
+</style> 
+
+  </head>
+  <body>
+
+  <div id="nav">
+    <ul>
+      <li><a href="../index.html">Assignment 3</a></li>
+      <li><a href="../task1/index.html">Task 1</a></li>
+      <li><a href="../task2/index.html">Task 2</a></li>
+      <li><a href="../task3/index.html">Task 3</a></li>
+    </ul>
+  </div>
+
+
+  <div id="header">
+    <div id="data-size" class="data-size">
+      <span>Select Theme:</span>
+      <button id="dark-theme" onmouseover="this.style.cursor='pointer'">Dark Theme</button><button id="light-theme" onmouseover="this.style.cursor='pointer'" disabled="disabled">Light Theme</button><br>
+      <span>data:</span>
+      <strong id="rendered-count"></strong>/<strong id="selected-count"></strong><!--<strong id="data-count"></strong>-->
+      <div class="fillbar"><div id="selected-bar"><div id="rendered-bar">&nbsp;</div></div></div>
+      <strong style="display:none" id="opacity"></strong>
+    </div>
+    <div style="min-width:540px; width:740px;">
+      <h1 class="header-top">Mobile Device Data</h1>via Parallel Coordinates
+      <br>
+      <span class="header-top">Made by Group 6</span>
+    </div>
+
+    <div style="clear:both;"></div>
+  </div>
+  <div id="chart">
+    <canvas id="background"></canvas>
+    <canvas id="foreground"></canvas>
+    <canvas id="highlight"></canvas>
+    <svg></svg>
+  </div>
+  <div id="wrap">
+    <div class="third">
+      <div class="little-box">
+        <h3>Controls:</h3>
+        <button title="Remove selected data" id="remove-filters" onmouseover="this.style.cursor='pointer'" enabled="enabled">Reset Filters</button>
+        <p>
+          <strong>Filter</strong>: Drag along an axis<br>
+          <strong>Remove Filter</strong>: Click the axis background<br>
+          <strong>Drag Filter</strong> to help visualize the relation
+        </p>
+        <p>
+          <strong style="color:#CFED7E;">——————</strong> : Average line<br>
+        </p>
+        <br>
+        <h3>About:</h3>
+        <p>
+          Based on data gathered from excel
+          <br><br>
+          Visualized using the Parallel Coordinates technique and d3.js. Reviews and Downloads axis are scaled logarithmically 
+          </p>
+            <br>
+
+      </div>
+    </div>
+    <div  class="third">
+      <small>
+        <!--Last rendered <strong id="render-speed"></strong> lines-->
+      </small>
+      <h3>Categories:</h3><button id="unselect-all" onmouseover="this.style.cursor='pointer'">Unselect All Categories</button><button id="select-all" disabled="disabled" onmouseover="this.style.cursor='pointer'">Select All Categories</button>
+      <p id="legend">
+      </p>
+
+      <h3>Conclusions:</h3>
+      <p>
+        Cluster0 --- feature phones/early- stage smartphones<br>
+        Cluster1 --- mid- performance smartphones<br>
+        Cluster2 --- wide-screen smartphones<br>
+        Cluster3 --- PDAs and early-stage tablets<br>
+        Cluster4 --- high- performance tablets<br>
+        Cluster5 --- high-performance smartphones<br>
+        Cluster6 --- keypad-based/mid-size smartphones<br>
+        </p>
+          <br>
+    </div>
+    <div class="third">
+      <div id="sorted-by"></div>
+      <h3>Sample Data: <input type="text" id="search" placeholder="Search Data..."></h3>
+      <p id="category-list">
+      </p>
+    </div>
+  </div>
+  </body>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js "></script>
+  <script src="jquery.color.js"></script>
+  <script src="2012oecd.js"></script>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</html>
